@@ -15,6 +15,36 @@ FoxDot
 		server.options.numInputBusChannels = 2; // set this to your hardware output channel size, if necessary
 		server.boot();
 
+		OSCFunc(
+			{
+				arg msg, time, addr, port;
+				var fn, load;
+
+				// Get local filename
+
+				fn = msg[1].asString;
+
+				// Print a message to the user
+
+				fn.postln;
+
+				// Add SynthDef to file
+
+				fn = File(fn, "r");
+				fn.readAllString.interpret;
+				fn.close;
+
+			},
+			'foxdot'
+		);
+
+		StageLimiter.activate(2);
+
+		"Listening for messages from FoxDot".postln;
+	}
+
+	*midi
+	{
 		MIDIClient.init;
 
 		midi = MIDIOut(0);
@@ -47,31 +77,6 @@ FoxDot
 
 		);
 
-		OSCFunc(
-			{
-				arg msg, time, addr, port;
-				var fn, load;
-
-				// Get local filename
-
-				fn = msg[1].asString;
-
-				// Print a message to the user
-
-				fn.postln;
-
-				// Add SynthDef to file
-
-				fn = File(fn, "r");
-				fn.readAllString.interpret;
-				fn.close;
-
-			},
-			'foxdot'
-		);
-
-		StageLimiter.activate(2);
-
-		"Listening for messages from FoxDot".postln;
+		"Listening for MIDI messages from FoxDot".postln;
 	}
 }
