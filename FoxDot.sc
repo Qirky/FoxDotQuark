@@ -2,6 +2,7 @@ FoxDot
 {
 
 	classvar server;
+	classvar midi;
 
 	*start
 	{
@@ -14,6 +15,37 @@ FoxDot
 		server.options.numInputBusChannels = 2; // set this to your hardware output channel size, if necessary
 		server.boot();
 
+		MIDIClient.init;
+
+		midi = MIDIOut(0);
+
+		OSCFunc(
+			{
+				arg msg, time, addr, port;
+				var note, vel, sus, channel;
+
+				// listen for specific MIDI trigger messages from FoxDot
+
+				msg.postln;
+
+				note    = msg[1];
+				vel     = msg[2];
+				sus     = msg[3];
+				channel = msg[4];
+
+				Task.new(
+					{
+						midi.noteOn(channel, note, vel);
+						sus.wait;
+						midi.noteOff(channel, note, vel)
+
+					}
+				).play;
+
+			},
+			'foxdot_midi'
+
+		);
 
 		OSCFunc(
 			{
@@ -23,6 +55,10 @@ FoxDot
 				// Get local filename
 
 				fn = msg[1].asString;
+
+				// Print a message to the user
+
+				fn.postln;
 
 				// Add SynthDef to file
 
