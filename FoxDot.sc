@@ -28,10 +28,10 @@ FoxDot
 
 				msg.postln;
 
-				note    = msg[1];
-				vel     = msg[2];
-				sus     = msg[3];
-				channel = msg[4];
+				note    = msg[2];
+				vel     = msg[3];
+				sus     = msg[4];
+				channel = msg[5];
 
 				Task.new(
 					{
