@@ -77,6 +77,7 @@ FoxDot
 
 		);
 
-		"Listening for MIDI messages from FoxDot".postln;
+		("Sending FoxDot MIDI messages to " ++ MIDIClient.destinations[port].name).postln;
+
 	}
 }
