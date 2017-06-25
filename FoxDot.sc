@@ -65,9 +65,9 @@ FoxDot
 
 				Task.new(
 					{
-						midi.noteOn(channel, note, vel);
+						midiout.noteOn(channel, note, vel);
 						sus.wait;
-						midi.noteOff(channel, note, vel)
+						midiout.noteOff(channel, note, vel)
 
 					}
 				).play;
