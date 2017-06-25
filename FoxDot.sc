@@ -56,8 +56,6 @@ FoxDot
 
 				// listen for specific MIDI trigger messages from FoxDot
 
-				msg.postln;
-
 				note    = msg[2];
 				vel     = msg[3];
 				sus     = msg[4];
