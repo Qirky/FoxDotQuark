@@ -2,7 +2,7 @@ FoxDot
 {
 
 	classvar server;
-	classvar midi;
+	classvar midiout;
 
 	*start
 	{
@@ -45,9 +45,11 @@ FoxDot
 
 	*midi
 	{
+		arg port=0;
+
 		MIDIClient.init;
 
-		midi = MIDIOut(0);
+		midiout = MIDIOut(port);
 
 		OSCFunc(
 			{
