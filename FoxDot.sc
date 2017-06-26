@@ -18,7 +18,7 @@ FoxDot
 		OSCFunc(
 			{
 				arg msg, time, addr, port;
-				var fn, load;
+				var fn;
 
 				// Get local filename
 
@@ -26,7 +26,7 @@ FoxDot
 
 				// Print a message to the user
 
-				fn.postln;
+				("Loading SynthDef from" + fn).postln;
 
 				// Add SynthDef to file
 
@@ -77,7 +77,7 @@ FoxDot
 
 		);
 
-		("Sending FoxDot MIDI messages to " ++ MIDIClient.destinations[port].name).postln;
+		("Sending FoxDot MIDI messages to" + MIDIClient.destinations[port].name).postln;
 
 	}
 }
