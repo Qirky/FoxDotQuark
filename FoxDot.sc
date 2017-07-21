@@ -67,7 +67,7 @@ FoxDot
 					{
 						midiout.noteOn(channel, note, vel);
 						sus.wait;
-						midiout.noteOff(channel, note, vel)
+						midiout.noteOff(channel, note, vel);
 
 					}
 				).play;
