@@ -54,7 +54,7 @@ FoxDot
 		OSCFunc(
 			{
 				arg msg, time, addr, port;
-				var note, vel, sus, channel, task;
+				var note, vel, sus, channel, nudge;
 
 				// listen for specific MIDI trigger messages from FoxDot
 
@@ -62,9 +62,10 @@ FoxDot
 				vel     = msg[3];
 				sus     = msg[4];
 				channel = msg[5];
+				nudge   = msg[6];
 
-				SystemClock.schedAbs(time, {midiout.noteOn(channel, note, vel)});
-				SystemClock.schedAbs(time + sus, {midiout.noteOff(channel, note, vel)});
+				SystemClock.schedAbs(time + nudge, {midiout.noteOn(channel, note, vel)});
+				SystemClock.schedAbs(time + nudge + sus, {midiout.noteOff(channel, note, vel)});
 
 			},
 			'foxdot_midi'
