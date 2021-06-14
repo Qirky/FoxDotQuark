@@ -5,7 +5,7 @@ FoxDot
 	classvar midiout;
 
 	*start
-	{
+	{ | remote = false |
 
 		server = Server.default;
 
@@ -13,6 +13,11 @@ FoxDot
 		server.options.maxNodes = 1024 * 32; // increase this if you are getting drop outs and the message "too many nodes"
 		server.options.numOutputBusChannels = 2; // set this to your hardware output channel size, if necessary
 		server.options.numInputBusChannels = 2; // set this to your hardware output channel size, if necessary
+
+		if (remote, {
+			server.options.bindAddress = "0.0.0.0"; // allow connections from any address
+		});
+
 		server.boot();
 
 		OSCFunc(
@@ -41,6 +46,11 @@ FoxDot
 		StageLimiter.activate(2);
 
 		"Listening for messages from FoxDot".postln;
+	}
+
+	*startRemote
+	{
+		this.start(true);
 	}
 
 	*midi
